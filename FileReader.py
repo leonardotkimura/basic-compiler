@@ -11,7 +11,7 @@ class FileReader:
         count = 0
 
         for line in Lines: 
-            formattedLines.append(line.strip())
+            formattedLines.append(line)
 
         fo.close()
 
