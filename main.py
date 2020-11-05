@@ -1,5 +1,5 @@
 from FileReader import FileReader
-from LexicalAnalyser import LexicalAnalyser
+from lexicalAnalyser.LexicalAnalyser import LexicalAnalyser
 
 import sys
 
@@ -7,9 +7,9 @@ def main(argv):
     fileReader = FileReader(argv[1])
     lexicalAnalyser = LexicalAnalyser()
     
-    lines = fileReader.execute()
-    print(lines)
-    tokens = lexicalAnalyser.execute(lines)
+    text = fileReader.execute()
+    
+    tokens = lexicalAnalyser.execute(text)
     for token in tokens:
         print(token.type, token.value)
 

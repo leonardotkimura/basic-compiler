@@ -6,13 +6,5 @@ class FileReader:
         fo = open(self.fileName, "r+")
         print ("Name of the file: ", fo.name)
 
-        Lines = fo.readlines() 
-        formattedLines = []
-        count = 0
-
-        for line in Lines: 
-            formattedLines.append(line)
-
-        fo.close()
-
-        return formattedLines
+        text = fo.read()
+        return text
