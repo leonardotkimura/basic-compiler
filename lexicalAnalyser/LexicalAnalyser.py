@@ -28,7 +28,8 @@ class LexicalAnalyser:
                 tokenString += char
                 tokenString = self.removeSpacesAndNewLines(tokenString)
 
-    
+        # self.refinateToken
+
         return tokens
     
     def removeSpacesAndNewLines(self, string):
