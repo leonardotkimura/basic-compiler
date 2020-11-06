@@ -1,5 +1,6 @@
 from .LexicalAnalyserAutomous import LexicalAnalyserAutomous
 from .Token import Token
+import re
 
 class LexicalAnalyser:
     def __init__(self):
@@ -28,9 +29,39 @@ class LexicalAnalyser:
                 tokenString += char
                 tokenString = self.removeSpacesAndNewLines(tokenString)
 
-        # self.refinateToken
-
+        tokens = self.refineTokens(tokens)
         return tokens
-    
+        
+    def refineTokens(self, tokens):
+        for index, token in enumerate(tokens):
+            if (self.isVar(token)):
+                token.type == "VAR"
+            elif (self.isEnd(token)):
+                token.type == "END"
+            elif (self.isPredef(token)):
+                token.type == "PREDEF"
+                
+        return tokens
+
+
     def removeSpacesAndNewLines(self, string):
         return string.strip().replace(" ", "")
+    
+    def isVar(self, token):
+        if(token.type == "ID"):
+            match = re.match("^[A-Z][0-9]$", token.value)
+            if(match):
+                return True
+        return False
+        
+    def isEnd(self, token):
+        if(token.type == "ID"):
+            if(token.value == "END"):
+                return True
+        return False
+
+    def isPredef(self, token):
+        if(token.type == "ID"):
+            if(token.value == "SEN"):
+                return True
+        return False

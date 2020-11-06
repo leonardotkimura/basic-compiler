@@ -10,10 +10,12 @@ class LexicalAnalyserAutomous:
                 self.state = 2
             if (self.isDigit(char)):
                 self.state = 3
-            if (self.isSpecial(char)):
+            if (self.isSingleSpecial(char)):
                 self.state = 4
             if (self.isQuote(char)):
                 self.state = 5
+            if (self.isDoubleSpecial(char)):
+                self.state = 7
 
         elif (self.state == 2):
             if (self.isLetter(char) or self.isDigit(char)):
@@ -32,12 +34,9 @@ class LexicalAnalyserAutomous:
                 return "NUMBER"
         
         elif(self.state == 4):
-            if (self.isSpecial(char)):
-                self.state = 4
-            else:
-                self.state = 1
-                self.transition(char)
-                return "SPECIAL"
+            self.state = 1
+            self.transition(char)
+            return "SPECIAL"
         
         elif(self.state == 5):
             if (self.isQuote(char)):
@@ -49,7 +48,19 @@ class LexicalAnalyserAutomous:
             self.state = 1
             self.transition(char)
             return "STRING"
-                
+            
+        elif(self.state == 7):
+            if(char == "=" or char == "<" or char == ">"):
+                self.state = 8
+            else:
+                self.state = 1
+                self.transition(char)
+                return "SPECIAL"
+        
+        elif(self.state == 8):
+            self.state = 1
+            self.transition(char)
+            return "SPECIAL"
 
 
     def isLetter(self, char): 
@@ -58,8 +69,15 @@ class LexicalAnalyserAutomous:
     def isDigit(self, char):
         return char.isdigit()
 
-    def isSpecial(self, char):
-        match = re.match("[\*\+-\/<>=\(\),]", char)
+    def isSingleSpecial(self, char):
+        match = re.match("[\*\+-\/=\(\),]", char)
+        if(match):
+            return True
+        else:
+            return False
+    
+    def isDoubleSpecial(self, char):
+        match = re.match("[<>]", char)
         if(match):
             return True
         else:
