@@ -17,7 +17,7 @@ class SyntaticalAnalyserAutomous:
         elif (self.state == 2):
             if (token.type == "ID" and token.value == "LET"):
                 self.state = 5
-            elif (token.type == "ID" and token.value == "END"):
+            elif (token.type == "END"):
                 self.state = 4
             else:
                 self.raiseException()
@@ -35,7 +35,7 @@ class SyntaticalAnalyserAutomous:
 
 ################## "LET" States #######################
         elif (self.state == 5):
-            if (token.type == "ID"):
+            if (token.type == "VAR"):
                 self.state = 6
             else:
                 self.raiseException()
@@ -55,9 +55,10 @@ class SyntaticalAnalyserAutomous:
 
         # empty Transition
         elif (self.state == 8):
-            self.state = 2
+            self.state = 3
             self.transition(token)
 
     def raiseException(self):
         print("raise Exception")
+        print(self.state)
         

@@ -35,11 +35,13 @@ class LexicalAnalyser:
     def refineTokens(self, tokens):
         for index, token in enumerate(tokens):
             if (self.isVar(token)):
-                token.type == "VAR"
+                token.type = "VAR"
             elif (self.isEnd(token)):
-                token.type == "END"
+                token.type = "END"
             elif (self.isPredef(token)):
-                token.type == "PREDEF"
+                token.type = "PREDEF"
+            elif (self.isLetter(token)):
+                token.type = "LETTER"
                 
         return tokens
 
@@ -63,5 +65,12 @@ class LexicalAnalyser:
     def isPredef(self, token):
         if(token.type == "ID"):
             if(token.value == "SEN"):
+                return True
+        return False
+    
+    def isLetter(self, token):
+        if(token.type == "ID"):
+            match = re.match("^[A-Z]$", token.value)
+            if(match):
                 return True
         return False

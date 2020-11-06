@@ -9,11 +9,11 @@ class ExpAutonomous:
         if (self.state == 1):
             if (token.type == "NUMBER"):
                 self.state = 4
-            elif (token.type == "ID"): # change to VAR
+            elif (token.type == "VAR"):
                 self.state = 4
             elif (token.type == "SPECIAL" and token.value == "("):
                 self.state = 2
-            elif (token.type == "ID" and token.value == "SEN"): # change to predef
+            elif (token.type == "PREDEF"):
                 self.state = 6
             elif (token.type == "ID" and token.value == "FN"):
                 self.state = 5
@@ -42,6 +42,7 @@ class ExpAutonomous:
                                              token.value == "/")):
                 self.state = 1
             else:
+                print("accept exp")
                 return True  # "Accepted"
         
         elif (self.state == 5):
