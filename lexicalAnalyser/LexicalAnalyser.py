@@ -64,7 +64,7 @@ class LexicalAnalyser:
 
     def isPredef(self, token):
         if(token.type == "ID"):
-            if(token.value == "SEN"):
+            if(token.value in ["SEN","COS","TAN","ATN","EXP","ABS","LOG","SQR","INT","RND"]):
                 return True
         return False
     

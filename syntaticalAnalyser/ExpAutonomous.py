@@ -18,7 +18,7 @@ class ExpAutonomous:
             elif (token.type == "ID" and token.value == "FN"):
                 self.state = 5
             else:
-                self.raiseException()
+                self.raiseException(token)
 
         elif (self.state == 2):
             self.instantiateExpAutomousIfNot()
@@ -32,33 +32,30 @@ class ExpAutonomous:
             if (token.type == "SPECIAL" and token.value == ")"):
                 self.state = 4
             else:
-                self.raiseException()
+                self.raiseException(token)
         
         # End State
         elif (self.state == 4):  
-            if (token.type == "SPECIAL" and (token.value == "+" or 
-                                             token.value == "-" or 
-                                             token.value == "*" or 
-                                             token.value == "/")):
+            if (token.type == "SPECIAL" and (token.value in ["+","-","*","/"])):
                 self.state = 1
             else:
-                print("accept exp")
                 return True  # "Accepted"
         
         elif (self.state == 5):
             if (token.type == "ID"): # CHANGE TO LETTER
                 self.state = 6
             else:
-                self.raiseException()
+                self.raiseException(token)
 
         elif (self.state == 6):
             if (token.type == "SPECIAL" and token.value == "("):
                 self.state = 2
             else:
-                self.raiseException()
+                self.raiseException(token)
 
-    def raiseException(self):
-        print("raise Exception")
+    def raiseException(self, token):
+        raise Exception("invalid Transition on state: {}; token: {}".format(self.state, token.value))
+
         
     def instantiateExpAutomousIfNot(self):
         if(self.expAutonomous == None):
