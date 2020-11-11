@@ -1,0 +1,3 @@
+Commands
+nasm -f elf64 -g -F dwarf -o test.o test.asm
+ld -o test test.o
