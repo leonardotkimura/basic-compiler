@@ -18,6 +18,6 @@ class SemanticalAnalyser:
             print(self.expCodeGenerator.elementStack)
 
         self.codeGenerator.addCodeLines(self.expCodeGenerator.codeLines)
-        self.codeGenerator.printCode()
+        self.codeGenerator.writeFile("./assembly/ex1.asm")
 
         return True

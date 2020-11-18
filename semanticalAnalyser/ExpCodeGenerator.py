@@ -11,8 +11,6 @@ class ExpCodeGenerator:
     
     def transition(self, token):
         action = self.expAutonomous.transition(token)
-        print("token: {} , state: {} ".format(token.value, self.expAutonomous.state))
-        print("action:{} ".format(action))
 
         # colocar os códigos de cada ação
         if (action=="ACTION_A"):
@@ -55,10 +53,8 @@ class ExpCodeGenerator:
             self.operatorStack.push("/")
         
         elif (action=="ACTION_J"):
-            print("starting action J")
             while(not self.operatorStack.isEmpty()):
                 print(self.elementStack)
-                print(self.operatorStack)
                 operator = self.operatorStack.pop()
                 if( operator in ["+","-","*","/"]):
                     self.generateCode(operator)
@@ -77,11 +73,10 @@ class ExpCodeGenerator:
             self.codeLines.append("add     rax,[{}]".format(elementB))
         elif(operator == "-"):
             self.codeLines.append("sub     rax,[{}]".format(elementB))
-        # elif(operator == "*"):
-            # self.codeLines.append("mov      r9,[{}]".format(elementB))
-            # self.codeLines.append("mul     r9")
-        # elif(operator == "/"):
-            # self.codeLines.append("add     rax,[{}]".format(elementB))
+        elif(operator == "*"):
+            self.codeLines.append("mul      qword [{}]".format(elementB))
+        elif(operator == "/"):
+            self.codeLines.append("div     qword [{}]".format(elementB))
 
         temporaryVariable = "temp{}".format(self.temporaryCounter)
         self.temporaryCounter += 1

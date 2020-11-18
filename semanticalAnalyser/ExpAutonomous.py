@@ -9,7 +9,7 @@ class ExpAutonomous:
 
 ################## Program States #######################
         if (self.state == 1):
-            if (token.type == "VAR"):
+            if (token.type == "VAR" or token.type == "LETTER"):
                 self.state = 4
                 return "ACTION_A"
             elif (token.type == "NUMBER"):

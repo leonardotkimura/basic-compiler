@@ -5,22 +5,13 @@ global      _start                              ;must be declared for linker (ld
 
 _start:                                         ;tell linker entry point
 
-    mov     rax,[A]
-    div     qword [A]
+    mov     rax,[B]                         
+    sub     rax,[C]                            
     mov     [temp0], rax
 
-    mov     rax,[B]
-    sub     rax,[C]
+    mov     rax,[A]                         
+    add     rax,[temp0]                            
     mov     [temp1], rax
-
-    mov     rax,[B]
-    add     rax,[temp1]
-    mov     [temp2], rax
-    
-    mov     rax,[temp0]
-    add     rax,[temp2]
-    mov     [temp3], rax
-
 
     int     0x80                                ;call kernel
 

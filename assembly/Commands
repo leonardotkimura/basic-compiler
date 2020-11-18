@@ -1,3 +1,9 @@
 Commands
-nasm -f elf64 -g -F dwarf -o test.o test.asm
-ld -o test test.o
+python3 main.py ./examples/teste.bas
+nasm -f elf64 -g -F dwarf -o ./assembly/ex1.o ./assembly/ex1.asm
+ld -o ./assembly/ex1 ./assembly/ex1.o
+
+gdb ./assembly/ex1
+b _end
+print (int)temp3
+run
