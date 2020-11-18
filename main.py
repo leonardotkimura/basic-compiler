@@ -17,9 +17,9 @@ def main(argv):
     for token in tokens:
         print(token.type, token.value)
 
-    print("\n\nStarting analyser")
-    syntaticalAnalyser.recognize(tokens)
-    print("\nprogram accepted")
+    # print("\n\nStarting analyser")
+    # syntaticalAnalyser.recognize(tokens)
+    # print("\nprogram accepted")
 
     semanticalAnalyser.generateCode(tokens)
 
