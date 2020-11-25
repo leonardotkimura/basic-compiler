@@ -2,7 +2,7 @@ section     .text
 global      _start                              ;must be declared for linker (ld)
 _start:
 mov     rax,[A]
-mul      qword [A]
+div     qword [A]
 mov     [temp0], rax
 mov     rax,[B]
 mul      qword [C]
@@ -11,7 +11,7 @@ mov     rax,[B]
 add     rax,[temp1]
 mov     [temp2], rax
 mov     rax,[temp0]
-add     rax,[temp2]
+sub     rax,[temp2]
 mov     [temp3], rax
 _end:
 int     0x80                                ;call kernel
